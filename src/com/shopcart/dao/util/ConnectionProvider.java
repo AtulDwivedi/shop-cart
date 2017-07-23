@@ -13,7 +13,7 @@ public class ConnectionProvider {
 			Class.forName("org.h2.Driver");
 
 			if (connection == null || connection.isClosed()) {
-				connection = DriverManager.getConnection("", "", "");
+				connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
