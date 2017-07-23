@@ -34,7 +34,7 @@ public class LoginDaoImpl implements LoginDao{
 				
 				if(un.equals(userName) && pass.equals(password))
 				{
-					System.out.println("Successfully logged in");
+					System.out.println("Username and Password matched");
 					retVal = true;
 				}
 			}
