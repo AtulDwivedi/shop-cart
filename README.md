@@ -1,5 +1,5 @@
 # shop-cart
-Shopping Cart
+Welcome to Shopping Cart
 
 ## Dependencies
 - h2-1.4.192.jar
