@@ -11,8 +11,7 @@ public class LoginDaoImpl implements LoginDao{
 
 	@Override
 	public int insertLogin(String userName, String password) {
-		// TODO Auto-generated method stub
-		return 0;
+			return 0;
 	}
 
 	@Override
@@ -49,8 +48,7 @@ public class LoginDaoImpl implements LoginDao{
 
 	@Override
 	public int updatePassword(String userName, String password) {
-		// TODO Auto-generated method stub
-		return 0;
+			return 0;
 	}
 	
 	
