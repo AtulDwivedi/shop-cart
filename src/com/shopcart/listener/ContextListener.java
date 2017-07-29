@@ -62,7 +62,7 @@ public class ContextListener implements ServletContextListener {
 			ddlDao.createTables(getPath);
 		
 		if (insertBaseData != null && insertBaseData.equalsIgnoreCase("yes"))
-			dmlDao.inserBaseData(getDmlFilePath);
+			dmlDao.insertBaseData(getDmlFilePath);
 	}
 
 }
