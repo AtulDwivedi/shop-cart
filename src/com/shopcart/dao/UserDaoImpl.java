@@ -13,8 +13,16 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insertUser(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		int retVal = 0;
+		try (Connection con = ConnectionProvider.getConnetion(); Statement stmt = con.createStatement()) {
+			retVal = stmt.executeUpdate(
+					"INSERT INTO SK_USER (USER_NAME, USER_EMAIL, USER_MOBILE, AGE) VALUES('" + user.getName() + "', '"
+							+ user.getEmail() + "', '" + user.getMobile() + "', " + user.getAge() + ")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return retVal;
 	}
 
 	@Override

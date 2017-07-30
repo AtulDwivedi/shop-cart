@@ -11,8 +11,14 @@ public class LoginDaoImpl implements LoginDao{
 
 	@Override
 	public int insertLogin(String userName, String password) {
-		// TODO Auto-generated method stub
-		return 0;
+		int retVal = 0;
+		try (Connection con = ConnectionProvider.getConnetion(); Statement stmt = con.createStatement()) {
+			retVal = stmt.executeUpdate(
+					"INSERT INTO SK_LOGIN VALUES('"+userName+"', '"+password+"')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return retVal;
 	}
 
 	@Override
