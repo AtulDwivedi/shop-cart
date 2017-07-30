@@ -1,9 +1,9 @@
 package com.shopcart.dao;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import com.shopcart.dao.util.ConnectionProvider;
@@ -13,8 +13,16 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insertUser(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		int retVal = 0;
+		try (Connection con = ConnectionProvider.getConnetion(); Statement stmt = con.createStatement()) {
+			retVal = stmt.executeUpdate(
+					"INSERT INTO SK_USER (USER_NAME, USER_EMAIL, USER_MOBILE, AGE) VALUES('" + user.getName() + "', '"
+							+ user.getEmail() + "', '" + user.getMobile() + "', " + user.getAge() + ")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return retVal;
 	}
 
 	@Override
@@ -25,35 +33,31 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserById(String userId) {
-		
-		Connection con = ConnectionProvider.getConnetion();
-		try {
-			
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT user_id,name,email,mobile,age,address FROM USER_DETAILS");
-			
-			while(rs.next())
-			{
-				int user_id= rs.getInt(1);
-				String name = rs.getString(2);
-				String email = rs.getString(3);
-				String mobile = rs.getString(4);
-				int age = rs.getInt(5);
-				String address= rs.getString(6);
-				
-				 System.out.print("user id" +user_id);
-				 System.out.print("name" +name);
-				 System.out.print("email" +email);
-				 System.out.print("mobile" +mobile);
-				 System.out.print("age" +age);
-				 System.out.print("address" + address);
-			}
+
+		User user = null;
+
+		try (Connection conn = ConnectionProvider.getConnetion()) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT USER_NAME, USER_EMAIL, USER_MOBILE, USER_AGE FROM SK_USER WHERE USER_ID ='" + userId + "'");
+			rs.next();
+
+			String userName = rs.getString(1);
+			String userEmail = rs.getString(2);
+			String userMobile = rs.getString(3);
+			int userAge = rs.getInt(4);
+
+			user = new User();
+
+			user.setName(userName);
+			user.setEmail(userEmail);
+			user.setMobile(userMobile);
+			user.setAge(userAge);
+
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}
-
-		return null;
+		return user;
 	}
 
 	@Override

@@ -11,7 +11,14 @@ public class LoginDaoImpl implements LoginDao{
 
 	@Override
 	public int insertLogin(String userName, String password) {
-			return 0;
+		int retVal = 0;
+		try (Connection con = ConnectionProvider.getConnetion(); Statement stmt = con.createStatement()) {
+			retVal = stmt.executeUpdate(
+					"INSERT INTO SK_LOGIN VALUES('"+userName+"', '"+password+"')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return retVal;
 	}
 
 	@Override
@@ -24,7 +31,7 @@ public class LoginDaoImpl implements LoginDao{
 		try {
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM LOGIN_TABLE");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM SK_LOGIN");
 			
 			while(rs.next())
 			{
