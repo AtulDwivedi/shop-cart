@@ -37,12 +37,13 @@ public class ContextListener implements ServletContextListener {
 		ServletContext contxt = arg0.getServletContext();
 
 		String createSchema = contxt.getInitParameter("CreateSchema");
-		String dropExistingTables = contxt.getInitParameter("DropExistingTables");
-		String insertBaseData = contxt.getInitParameter("InsertBaseData");
 
-		String dbPropPath = contxt.getRealPath("WEB-INF//db//properties//db.properties");
-		
-		DatabaseManager.runSchemaScreator(dbPropPath);
+		if (createSchema != null && createSchema.equalsIgnoreCase("yes")) {
+			String dbPropPath = contxt.getRealPath("WEB-INF//db//properties//db.properties");
+			String ddlFilPath = contxt.getRealPath("WEB-INF//db//ddl//create-tables.sql");
+			String dmlFilePath = contxt.getRealPath("WEB-INF//db//dml//insert.sql");
+
+			DatabaseManager.runSchemaScreator(dbPropPath, ddlFilPath, dmlFilePath, "");
+		}
 	}
-
 }
