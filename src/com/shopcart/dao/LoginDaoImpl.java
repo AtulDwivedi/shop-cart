@@ -55,8 +55,7 @@ public class LoginDaoImpl implements LoginDao{
 
 	@Override
 	public int updatePassword(String userName, String password) {
-		// TODO Auto-generated method stub
-		return 0;
+			return 0;
 	}
 	
 	
