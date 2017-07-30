@@ -25,7 +25,7 @@ public class LoginDaoImpl implements LoginDao{
 		try {
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM LOGIN_TABLE");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM SK_LOGIN");
 			
 			while(rs.next())
 			{
