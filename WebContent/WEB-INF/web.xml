@@ -11,14 +11,6 @@
   </welcome-file-list>
    <context-param>
     <param-name>CreateSchema</param-name>
-    <param-value>no</param-value>
-  </context-param>
-  <context-param>
-    <param-name>DropExistingTables</param-name>
-    <param-value>no</param-value>
-  </context-param>
-  <context-param>
-    <param-name>InsertBaseData</param-name>
-    <param-value>no</param-value>
+    <param-value>yes</param-value>
   </context-param>
 </web-app>
